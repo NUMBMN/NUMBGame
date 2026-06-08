@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play MOBIN GAME - a classic Tic-Tac-Toe game with interactive features and a challenging AI opponent.">
+    <meta name="author" content="Stone">
+    <title>MOBIN GAME | دوز بازی مبین</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+<!-- CONFETTI CANVAS -->
+<canvas id="confetti-canvas"></canvas>
+
+<!-- THEME TOGGLE -->
+<label class="theme-switch" title="تغییر تم">
+    <input type="checkbox" id="theme-toggle">
+    <span class="theme-track">
+        <span class="theme-thumb">
+            <span class="icon-sun">☀️</span>
+            <span class="icon-moon">🌙</span>
+        </span>
+    </span>
+</label>
+
+<!-- COIN DISPLAY -->
+<div class="coin-display" id="coin-display">
+    🪙 <span id="coin-count">0</span>
+</div>
+
+<!-- SHOP OVERLAY -->
+<div class="shop-overlay" id="shop-overlay" style="display:none;">
+    <div class="shop-modal">
+        <div class="shop-header">
+            <span>🛒 فروشگاه مهره‌ها</span>
+            <button class="shop-close" id="shop-close">✕</button>
+        </div>
+        <div class="shop-coins">🪙 موجودی: <span id="shop-coin-count"></span></div>
+        <div class="shop-grid" id="shop-grid"></div>
+
+        <!-- SOUND SETTINGS in shop -->
+        <div class="sound-settings">
+            <div class="sound-title">🔊 صداهای شخصی‌سازی</div>
+            <div class="sound-row">
+                <label class="sound-label">🎉 صدای برد</label>
+                <label class="sound-upload-btn">
+                    آپلود <input type="file" id="sound-win" accept="audio/*" style="display:none;">
+                </label>
+                <span class="sound-name" id="name-win">پیش‌فرض</span>
+            </div>
+            <div class="sound-row">
+                <label class="sound-label">😢 صدای باخت</label>
+                <label class="sound-upload-btn">
+                    آپلود <input type="file" id="sound-lose" accept="audio/*" style="display:none;">
+                </label>
+                <span class="sound-name" id="name-lose">پیش‌فرض</span>
+            </div>
+            <div class="sound-row">
+                <label class="sound-label">😑 صدای مساوی</label>
+                <label class="sound-upload-btn">
+                    آپلود <input type="file" id="sound-tie" accept="audio/*" style="display:none;">
+                </label>
+                <span class="sound-name" id="name-tie">پیش‌فرض</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<main class="game-container">
+    <h1 class="game-title">MOBIN GAME</h1>
+
+    <!-- SCORE BOARD -->
+    <div class="scoreboard">
+        <div class="score-item score-x">
+            <span class="score-label">X</span>
+            <span class="score-val" id="score-x">0</span>
+        </div>
+        <div class="score-item score-tie">
+            <span class="score-label">مساوی</span>
+            <span class="score-val" id="score-tie">0</span>
+        </div>
+        <div class="score-item score-o">
+            <span class="score-label">O</span>
+            <span class="score-val" id="score-o">0</span>
+        </div>
+    </div>
+
+    <!-- SETTINGS ROW -->
+    <div class="settings-row">
+        <div class="diff-group" id="diff-group">
+            <button class="diff-btn" data-diff="easy">آسون</button>
+            <button class="diff-btn active" data-diff="medium">متوسط</button>
+            <button class="diff-btn" data-diff="hard">سخت</button>
+        </div>
+        <label class="mode-switch">
+            <input type="checkbox" id="mode-toggle">
+            <span class="slider-track"></span>
+            <span id="mode-label" class="mode-label">تک نفره</span>
+        </label>
+    </div>
+
+    <!-- BOARD SIZE SELECTOR -->
+    <div class="size-row">
+        <button class="size-btn active" data-size="3">3×3</button>
+        <button class="size-btn" data-size="4">4×4</button>
+        <button class="size-btn" data-size="5">5×5</button>
+    </div>
+
+    <!-- AI TAUNT -->
+    <div class="ai-taunt" id="ai-taunt"></div>
+
+    <!-- TIMER -->
+    <div class="timer-wrap">
+        <div class="timer-bar-bg">
+            <div class="timer-bar" id="timer-bar"></div>
+        </div>
+        <span class="timer-num" id="timer-display">10</span>
+    </div>
+
+    <!-- BOARD -->
+    <section class="game-board" style="position:relative;">
+        <svg id="win-line-svg" style="display:none;position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;">
+            <line id="win-line" x1="0" y1="0" x2="0" y2="0"
+                stroke="#1EE6FF" stroke-width="5" stroke-linecap="round"
+                style="transition: stroke-dashoffset 0.4s ease;"/>
+        </svg>
+    </section>
+
+    <!-- VOICE RESULT -->
+    <div class="voice-result" id="voice-result" style="opacity:0;"></div>
+
+    <div class="status"></div>
+    <div class="result" id="result"></div>
+
+    <div class="button-container">
+        <button id="play-again" class="play-again" style="display:none;">دوباره تلاش کن</button>
+        <a href="#" class="support" target="_blank" rel="noopener noreferrer" style="display:none;">ایدی سازنده</a>
+        <button id="voice-btn" class="voice-btn" title="کنترل صوتی">🎙️</button>
+        <button id="shop-btn" class="shop-btn" title="فروشگاه">🛒</button>
+    </div>
+
+    <!-- COIN POPUP AREA -->
+    <div id="coin-popup-area"></div>
+</main>
+
+<footer>
+    <p class="footer-content">© 2026 <a href="https://t.me/MBNUMB" class="terms-link">پشتیبانی</a> تمامی حقوق محفوظ است.</p>
+    <p class="footer-links">
+        <a href="/pages/privacy-policy/index.html" class="terms-link">حریم خصوصی</a> | 
+        <a href="/pages/nemid-inam/index.html" class="terms-link">نمیدونم اینجا چی بزارم</a>
+    </p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
