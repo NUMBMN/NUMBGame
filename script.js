@@ -25,13 +25,13 @@ let selectedPieceO = localStorage.getItem('mobin_piece_o') || 'classic';
 
 const PIECES = {
   classic:  { name: 'کلاسیک',     labelX: 'X',  labelO: 'O',  price: 0,    emoji: '✖️/⭕' },
-  star:     { name: 'ستاره',       labelX: '⭐', labelO: '🌟', price: 30,   emoji: '⭐/🌟' },
+  star:     { name: 'نازی',       labelX: '💋', labelO: '🥺', price: 30,   emoji: '💋/🥺' },
   fire:     { name: 'آتش',         labelX: '🔥', labelO: '💧', price: 50,   emoji: '🔥/💧' },
-  diamond:  { name: 'الماس',       labelX: '💎', labelO: '💜', price: 80,   emoji: '💎/💜' },
+  diamond:  { name: ' و سیگما لوس',       labelX: '🎀', labelO: '🗿', price: 80,   emoji: '🎀/🗿' },
   skull:    { name: 'جمجمه',       labelX: '💀', labelO: '👻', price: 60,   emoji: '💀/👻' },
   crown:    { name: 'تاج',         labelX: '👑', labelO: '🏆', price: 100,  emoji: '👑/🏆' },
   robot:    { name: 'ربات',        labelX: '🤖', labelO: '👾', price: 70,   emoji: '🤖/👾' },
-  heart:    { name: 'قلب',         labelX: '❤️', labelO: '💚', price: 45,   emoji: '❤️/💚' },
+  heart:    { name: 'عشق',         labelX: '🫵', labelO: '💋', price: 45,   emoji: '🫵/💋' },
 };
 
 function saveCoins() {
